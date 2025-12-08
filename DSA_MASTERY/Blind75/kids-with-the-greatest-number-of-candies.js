@@ -41,4 +41,37 @@ n == candies.length
 2 <= n <= 100
 1 <= candies[i] <= 100
 1 <= extraCandies <= 50
+
+https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/description/?envType=study-plan-v2&envId=leetcode-75
 */
+
+// PSEUDOCODE 1
+/*
+1. find the max value among all the candies array
+2. loop through each candy and add the extracandies
+3. Check if on adding the extra with the actual candy, the candy is more than the max candy in the candies array
+4. If the value of the candy with the extra candy is greater than the max candy push true into the answer array
+*/
+
+/**
+ * @param {number[]} candies
+ * @param {number} extraCandies
+ * @return {boolean[]}
+ */
+var kidsWithCandies = function(candies, extraCandies) {
+    let answer = []
+    const maxCandy = candies.reduce((acc, curr) => {
+       return acc < curr ? acc = curr : acc
+    })
+
+    candies.forEach((candy) => {
+        let givenExtra = candy + extraCandies 
+        return answer.push(givenExtra >= maxCandy)
+    })
+
+    return answer
+};
+
+console.log(kidsWithCandies([2,3,5,1,3], 3))
+console.log(kidsWithCandies([4,2,1,1,2], 1))
+console.log(kidsWithCandies([12, 1, 12], 10))
