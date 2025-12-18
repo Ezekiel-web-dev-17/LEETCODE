@@ -34,19 +34,58 @@ Constraints:
  * @param {number[]} nums
  * @return {number[]}
  */
+
+/*
 var findErrorNums = function(nums) {
-    nums = nums.sort((a, b) => a - b)
+    // nums = nums.sort((a, b) => a - b)
+    const hash = {}
    for (let i = 1; i <= nums.length; i++){
-    // console.log( [nums[i-1], i])
-    if (nums[i-1] === i && nums[0] === 1){
-        console.log("Equal");
-    } else{
-        return [nums[i-1], i]
-    }
+    hash[i] = nums[i-1]
+    // if (nums[i-1] === i && nums[0] === 1){
+    //     // console.log("Equal");
+    // } else{
+    //     return [nums[i-1], i]
+    // }
+
    }
+    return hash
+};
+*/
+
+var findErrorNums = function (nums) {
+    nums = nums.sort((a, b) => a - b)
+    const hash = {}
+    const suspects = []
+    for (let i = 1; i <= nums.length; i++) {
+        hash[i] = nums[i - 1]
+    }
+
+
+    for (const num in hash) {
+        const element = hash[num];
+        if (Number(num) !== element) {
+            suspects.push(element)
+        }
+    }
+
+    const duplicated = {}
+    let culpriter;
+    suspects.forEach((suspect) => {
+        nums.filter((num) => { if (num === suspect) { duplicated[suspect] ? duplicated[suspect] += 1 : duplicated[suspect] = 1 } })
+    })
+
+    for (const culprit in duplicated) {
+        duplicated[culprit] > 1 ? culpriter = parseInt(culprit) : "WHEY HA";
+    }
+
+    return [culpriter, Number(Object.keys(hash).find((a) => !nums.includes(Number(a))))];
 };
 
-// console.log(findErrorNums([1, 2, 2, 4]))
-// console.log(findErrorNums([1, 1]))
-// console.log(findErrorNums([2, 2]))
-console.log(findErrorNums([3,2,2]))
+console.log(findErrorNums([1, 2, 2, 4]))
+console.log(findErrorNums([1, 1]))
+console.log(findErrorNums([2, 2]))
+console.log(findErrorNums([3, 2, 3, 4, 6, 5]))
+console.log(findErrorNums([1, 5, 3, 2, 2, 7, 6, 4, 8, 9]))
+console.log(findErrorNums([1, 3, 3, 4, 2]))
+console.log(findErrorNums([9, 7, 6, 5, 4, 3, 2, 1, 1, 10]))
+console.log(findErrorNums([3, 2, 2]))
