@@ -34,15 +34,15 @@ Follow up: Could you do it without extra space and in O(n) runtime? You may assu
  * @return {number[]}
  */
 var findDisappearedNumbers = function (nums) {
-    const soluArr = {}
-
-    for (let i = 1; i < nums.length + 1; i++) {
+    const originalLength = nums.length
+    let life = ""
+    for (let i = 1; i < originalLength + 1; i++) {
         if (!nums.includes(i)) {
-            soluArr[i] = i
+            life = life.concat(i + ", ");
         }
     }
 
-    return Object.values(soluArr);
+    return life.split(", ").filter(item => item !== "").map(Number);
 };
 
 console.log(findDisappearedNumbers([4, 3, 2, 7, 8, 2, 3, 1]))
