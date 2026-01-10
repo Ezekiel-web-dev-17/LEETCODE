@@ -81,11 +81,9 @@ var threeSum = function (nums = [-1, 0, 1, 2, -1, -4]) {
         }
     }
 
-    const sumAll = answersArr.reduce((prev = 0, curr, cInd) => {
-        prev = prev + curr
-        console.log(prev, curr, cInd)
+    const sumAll = answersArr.reduce((prev, curr) => {
+        return prev + curr;
     })
-    console.log(sumAll)
 
     return sumAll === 0 ? [answersArr] : []
 };
