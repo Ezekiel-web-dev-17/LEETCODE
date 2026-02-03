@@ -42,14 +42,18 @@ All the strings of wordDict are unique.
  * @return {boolean}
  */
 var wordBreak = function (s = "leetcode", wordDict = ["leet", "code"]) {
-    for (let i = 0; i < wordDict.length; i++) {
+    let i = 0;
+    while (i < wordDict.length) {
         if (s.includes(wordDict[i])) {
             s = s.replaceAll(wordDict[i], "")
-            return s === wordDict.filter((word) => word !== wordDict[i]).toString()
-        } else return false
+            return s === wordDict.filter((word) => word !== wordDict[i]).toString().replaceAll(",", "") || s.length === 0;
+        } else i++;
     }
+
+    return false;
 
 };
 
 console.log(wordBreak("applepenapple", ["apple", "pen"]));
 console.log(wordBreak("a", ["b"]));
+console.log(wordBreak("bb", ["a", "b", "bbb", "bbbb"]))
