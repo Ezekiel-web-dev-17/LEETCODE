@@ -1,0 +1,7 @@
+take words
+///create empty found
+if any of words can be found in the string put into found but add a space at the end of the wordFound
+else ///
+
+search for a word and if that word is found, the rest of the word must be in the dict
+else return false.

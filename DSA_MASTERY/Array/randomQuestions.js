@@ -69,23 +69,21 @@ The second train of thought for two-sum is, without changing the array, can we u
  */
 
 var threeSum = function (nums = [-1, 0, 1, 2, -1, -4]) {
-    let values = { x: 0, y: 1, z: 2 },
-        answersArr = []
-
+    let store = {}
+    nums.toSorted((a, b) => a - b);
     for (let i = 0; i < nums.length; i++) {
-        for (const key of Object.keys(values)) {
-            if (values[key] === i) {
-                answersArr.push(nums[values[key]])
-                break
-            } else continue
+        let point = nums[i], numslist = nums.filter((num, ind) => i !== ind);
+
+        for (let j = 0; j < numslist.length; j++) {
+            store[j] = numslist[j]
         }
+
+        const ans = store.hasOwnProperty(i) && store[i]
+
+        console.table(store)
     }
 
-    const sumAll = answersArr.reduce((prev, curr) => {
-        return prev + curr;
-    })
-
-    return sumAll === 0 ? [answersArr] : []
 };
 
+// first, using a marker or pointer called point, then use the two sum method to solve it.
 console.log(threeSum())
